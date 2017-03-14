@@ -1,0 +1,25 @@
+CXX = gcc
+CXXFLAGS = -fcilkplus -lcilkrts -w -O3 
+LDFLAGS = -fcilkplus -lcilkrts -O3 -w
+OFLAGS= -O3
+WFLAGS= -w
+SOURCE = $(guass_cilk.c)
+OBJECTS = $(SOURCE:.c=.o)
+TARGET= guass_cilk
+
+
+
+default: $(TARGET)
+        
+
+%.o: %.c
+	$(CXX)  $(CXXFLAGS) $(OFLAGS) $(WFLAGS) -c -o $@ $< $(LDFLAGS)
+        
+       
+
+parcount: $(OBJECTS)
+	  $(CXX) $(CXXFLAGS) $(OFLAGS) $(WFLAGS) $< -o $@ $(LDFLAGS)
+       
+ 
+clean:
+	rm -f $(OBJECTS) $(TARGET)
